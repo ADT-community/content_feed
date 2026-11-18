@@ -16,6 +16,20 @@ Big platforms largely don't pay creators in most African countries, so huge audi
 
 Ads pay little in many African markets, so this app earns from fans and brands paying creators directly, with the app taking a cut.
 
+## Web app (`web/`)
+
+A mobile web app built around a full-screen, swipe-up video feed:
+
+- **Feed:** videos autoplay as you swipe; tap to pause, double-tap to like, sound toggle. Comment, share, and open a creator's profile to follow them.
+- **Tips and gifts:** the gift button opens gifts (🌳 Baobab ₦200 → 👑 Crown ₦5,000) or plain tips, paid from mobile money (OPay, PalmPay, MTN MoMo, M-Pesa, Airtel Money). It shows exactly what the creator receives (80% by default).
+- **Post:** record or pick a video (up to 60 s / 50 MB), add a caption, post it to the top of the feed.
+- **Earnings:** balance, tips this week, recent supporters, your posts, and **cash out to mobile money**.
+- **Safety from day one:** every video has a **Report** option (spam, sexual content, violence, hate, child safety, false information); reported videos are hidden right away pending review.
+
+Out of the box it runs in **demo mode** with fictional creators and generated placeholder videos (`web/data.js`, `web/media/`). Uploads stay on the phone, and tips and payouts are simulated. Settings such as the platform fee, minimum payout and upload limits live in `web/config.js`; set `apiUrl` there to connect a backend.
+
+**Try it:** serve `web/` (for example `npx serve web`) and open it on a phone.
+
 ## How it earns
 
 - A cut of tips, gifts and sales
@@ -41,6 +55,7 @@ Ads pay little in many African markets, so this app earns from fans and brands p
 
 ## Starter tasks (bounty candidates)
 
+- [x] Web prototype: feed, tips and gifts, profiles, posting, earnings, reporting (`web/`)
 - [ ] Choose a video hosting approach and estimate cost per 1,000 views (research bounty)
 - [ ] Data model: users, creators, posts, follows, tips, payouts
 - [ ] Sign up and creator profiles

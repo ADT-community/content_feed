@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0d0b0a">
+<title>content_feed — Creators get paid</title>
+<meta name="description" content="Short videos from African creators. Tip and send gifts by mobile money.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app">
+
+  <!-- FEED -->
+  <section class="view active" id="view-feed" aria-label="Feed">
+    <header class="feed-top">
+      <div class="brand">content<span>_</span>feed</div>
+      <button class="icon-btn" id="soundBtn" aria-label="Turn sound on" aria-pressed="false">
+        <svg class="off" viewBox="0 0 24 24"><path d="M16.5 12A4.5 4.5 0 0 0 14 8v2.2l2.5 2.5V12ZM19 12c0 .9-.2 1.8-.5 2.6l1.5 1.5A8.9 8.9 0 0 0 21 12a9 9 0 0 0-7-8.8v2.1A7 7 0 0 1 19 12ZM4.3 3 3 4.3 7.7 9H3v6h4l5 5v-6.7l4.3 4.3a7 7 0 0 1-2.3 1.2v2.1a9 9 0 0 0 3.7-1.8l2 2L21 19.7l-9-9L4.3 3ZM12 4 9.9 6.1 12 8.2V4Z"/></svg>
+        <svg class="on" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3Zm13.5 3A4.5 4.5 0 0 0 14 8v8a4.5 4.5 0 0 0 2.5-4ZM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6Z"/></svg>
+      </button>
+    </header>
+    <main class="feed" id="feed"></main>
+  </section>
+
+  <!-- CREATE -->
+  <section class="view" id="view-create" aria-label="Post a video">
+    <div class="page">
+      <h1>Post a video</h1>
+      <p class="muted">Up to <span id="maxSec"></span> seconds. Fans can tip you and send gifts.</p>
+      <label class="picker" id="picker">
+        <input type="file" id="fileInput" accept="video/*" hidden>
+        <video id="preview" playsinline muted loop hidden></video>
+        <span class="picker-empty" id="pickerEmpty">
+          <svg viewBox="0 0 24 24"><path d="M17 10.5V7a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-3.5l4 4v-11l-4 4Z"/></svg>
+          <b>Choose or record a video</b>
+          <small>Tap to open your camera or gallery</small>
+        </span>
+      </label>
+      <label class="field-label" for="caption">Caption</label>
+      <textarea id="caption" maxlength="300" rows="3" placeholder="Say something about your video… #hashtags"></textarea>
+      <button class="btn primary full" id="postBtn" disabled>Post</button>
+      <p class="muted small" id="createNote">Demo mode: your video stays on this phone.</p>
+    </div>
+  </section>
+
+  <!-- EARNINGS -->
+  <section class="view" id="view-earn" aria-label="Your earnings">
+    <div class="page">
+      <h1>Your earnings</h1>
+      <div class="balance">
+        <span class="k">Available to cash out</span>
+        <span class="v" id="balance">₦0</span>
+        <button class="btn primary" id="payoutBtn">Cash out to mobile money</button>
+      </div>
+      <div class="kpis">
+        <div class="kpi"><span class="k">Tips & gifts this week</span><span class="v" id="weekTotal">₦0</span></div>
+        <div class="kpi"><span class="k">Supporters</span><span class="v" id="supporterCount">0</span></div>
+      </div>
+      <h2 class="section-title">Recent supporters</h2>
+      <div class="list" id="supporters"></div>
+      <h2 class="section-title">Your posts</h2>
+      <div class="grid" id="myPosts"></div>
+      <p class="muted small foot">You keep <span id="creatorShare"></span> of every tip and gift. Payouts go straight to your mobile money wallet.</p>
+    </div>
+  </section>
+
+  <nav class="tabs" aria-label="Main">
+    <button class="tab active" data-view="feed">
+      <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8h5Z"/></svg>Home
+    </button>
+    <button class="tab create" data-view="create" aria-label="Post a video">
+      <span><svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2Z"/></svg></span>
+    </button>
+    <button class="tab" data-view="earn">
+      <svg viewBox="0 0 24 24"><path d="M21 7H3a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1Zm-9 9a3 3 0 1 1 0-6 3 3 0 0 1 0 6ZM20 5H4V4h16v1Z"/></svg>Earnings
+    </button>
+  </nav>
+
+  <div class="sheet-bg" id="sheetBg" hidden>
+    <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+      <div class="grab"></div>
+      <h2 id="sheetTitle"></h2>
+      <div id="sheetBody"></div>
+    </div>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</div>
+<script src="config.js"></script>
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
