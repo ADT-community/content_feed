@@ -55,6 +55,7 @@ Out of the box it runs in **demo mode** with fictional creators and generated pl
 
 ## Starter tasks (bounty candidates)
 
+- [ ] **Design bounty:** replace the placeholder minimal design with a proper design system and screens (`web/styles.css`)
 - [x] Web prototype: feed, tips and gifts, profiles, posting, earnings, reporting (`web/`)
 - [ ] Choose a video hosting approach and estimate cost per 1,000 views (research bounty)
 - [ ] Data model: users, creators, posts, follows, tips, payouts
