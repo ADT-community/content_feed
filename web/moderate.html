@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Moderator – Reported Posts</title>
+  <style>
+    body {font-family: Arial, sans-serif; margin: 2rem;}
+    .report {border: 1px solid #ccc; padding: 1rem; margin-bottom: 1rem;}
+    .actions button {margin-right: 0.5rem;}
+  </style>
+</head>
+<body>
+  <h1>Reported Posts</h1>
+  <div id="list">Loading reports…</div>
+
+  <script>
+    async function loadReports() {
+      const resp = await fetch('/api/reports');
+      const data = await resp.json();
+      const list = document.getElementById('list');
+      list.innerHTML = '';
+      if (!data.reports || data.reports.length === 0) {
+        list.textContent = 'No pending reports.';
+        return;
+      }
+      data.reports.forEach(r => {
+        const div = document.createElement('div');
+        div.className = 'report';
+        div.dataset.id = r.id;
+        div.innerHTML = `
+          <p><strong>Report ID:</strong> ${r.id}</p>
+          <p><strong>Post ID:</strong> ${r.postId}</p>
+          <p><strong>Reason:</strong> ${r.reason}</p>
+          <p><strong>Reporter:</strong> ${r.reporter}</p>
+          <div class="actions">
+            <button data-action="keep">Keep</button>
+            <button data-action="remove">Remove</button>
+          </div>
+        `;
+        list.appendChild(div);
+      });
+    }
+
+    document.getElementById('list').addEventListener('click', async e => {
+      if (e.target.tagName !== 'BUTTON') return;
+      const action = e.target.dataset.action;
+      const reportDiv = e.target.closest('.report');
+      const reportId = reportDiv.dataset.id;
+      await fetch('/api/moderate', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({reportId, action, moderator: 'admin'})
+      });
+      reportDiv.remove();
+    });
+
+    loadReports();
+  </script>
+</body>
+</html>
