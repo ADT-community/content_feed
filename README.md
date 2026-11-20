@@ -26,9 +26,17 @@ A mobile web app built around a full-screen, swipe-up video feed:
 - **Earnings:** balance, tips this week, recent supporters, your posts, and **cash out to mobile money**.
 - **Safety from day one:** every video has a **Report** option (spam, sexual content, violence, hate, child safety, false information); reported videos are hidden right away pending review.
 
-Out of the box it runs in **demo mode** with fictional creators and generated placeholder videos (`web/data.js`, `web/media/`). Uploads stay on the phone, and tips and payouts are simulated. Settings such as the platform fee, minimum payout and upload limits live in `web/config.js`; set `apiUrl` there to connect a backend.
+Out of the box it runs in **demo mode** with fictional creators and generated placeholder videos (`web/data.js`, `web/media/`). Uploads stay on the phone, and tips and payouts are simulated. Settings such as the platform fee, minimum payout and upload limits live in `web/config.js`; set `apiUrl` there to connect the backend in `backend/`.
 
 **Try it:** serve `web/` (for example `npx serve web`) and open it on a phone.
+
+## Backend (`backend/`)
+
+A FastAPI + SQLite skeleton with **phone sign-in**: `POST /auth/otp` sends a
+6-digit code, `POST /auth/verify` returns a bearer token. Codes last 5 minutes
+and allow 5 wrong attempts. SMS is mocked -- the code is logged to the server
+console, so there are no provider keys to set up. See
+[`backend/README.md`](backend/README.md) to run it and its tests.
 
 ## How it earns
 
