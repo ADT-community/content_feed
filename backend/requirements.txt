@@ -1,0 +1,8 @@
+# content_feed backend. Python 3.10+.
+# Storage is SQLite via the standard library, so there is nothing to install for it.
+fastapi>=0.110
+uvicorn[standard]>=0.29
+
+# Tests
+pytest>=8.0
+httpx>=0.27          # used by fastapi.testclient
