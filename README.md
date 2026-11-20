@@ -30,6 +30,14 @@ Out of the box it runs in **demo mode** with fictional creators and generated pl
 
 **Try it:** serve `web/` (for example `npx serve web`) and open it on a phone.
 
+## Backend (`backend/`)
+
+A zero-dependency Python backend for phone sign-in, creator profiles and follows.
+Run it with one command: `python -m backend` (listens on `http://127.0.0.1:8000`).
+The PostgreSQL data model is in `backend/schema.sql`; local runs use SQLite so no
+database setup is needed. Tests: `python -m unittest discover -s backend/tests -v`.
+See [`backend/README.md`](backend/README.md) for the API and run instructions.
+
 ## How it earns
 
 - A cut of tips, gifts and sales
@@ -58,7 +66,7 @@ Out of the box it runs in **demo mode** with fictional creators and generated pl
 - [ ] **Design bounty:** replace the placeholder minimal design with a proper design system and screens (`web/styles.css`)
 - [x] Web prototype: feed, tips and gifts, profiles, posting, earnings, reporting (`web/`)
 - [ ] Choose a video hosting approach and estimate cost per 1,000 views (research bounty)
-- [ ] Data model: users, creators, posts, follows, tips, payouts
+- [x] Data model: users, creators, posts, follows, tips, payouts
 - [ ] Sign up and creator profiles
 - [ ] Video upload and playback
 - [ ] Feed: following + simple trending
